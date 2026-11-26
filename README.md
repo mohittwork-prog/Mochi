@@ -30,7 +30,7 @@ Keys are used only to animate the paws and face. Nothing is saved, logged or sen
 
 - **Move it:** drag the cat anywhere.
 - **Pat it:** click or stroke its head.
-- **Menu bar cat icon:** change the look (2D, 2.5D, 3D, Drawn), coat and size, let clicks pass through to apps underneath, open at login, or quit.
+- **Settings:** click the cat icon in the menu bar and choose **Settings…** to change the look (2D, 2.5D, 3D, Drawn), coat, size and opacity, let clicks pass through to apps underneath, turn on open at login, and check that keyboard access is working.
 - The eyes follow your cursor across the whole screen.
 
 ## Make the .dmg installer

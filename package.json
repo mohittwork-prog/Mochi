@@ -1,7 +1,7 @@
 {
   "name": "mochi-widget",
   "productName": "Mochi",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "A desktop cat that floats above your apps and types when you type.",
   "main": "main.js",
   "scripts": {
@@ -29,7 +29,9 @@
     "files": [
       "main.js",
       "preload.js",
+      "settings-preload.js",
       "widget.html",
+      "settings.html",
       "trayTemplate.png",
       "trayTemplate@2x.png"
     ],
@@ -49,6 +51,9 @@
       ],
       "artifactName": "Mochi-${version}-${arch}.dmg"
     },
-    "npmRebuild": false
+    "npmRebuild": false,
+    "asarUnpack": [
+      "node_modules/uiohook-napi/**"
+    ]
   }
 }

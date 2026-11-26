@@ -825,11 +825,12 @@ if(window.mochi){
   window.mochi.onSet((k,v)=>{
     if(k==='look'){const b=document.querySelector('.seg [data-v="'+v+'"]');if(b)b.click()}
     if(k==='coat'){const b=document.querySelector('.sw[data-i="'+v+'"]');if(b)b.click()}
+    if(k==='op'){const r=document.getElementById('op');r.value=v;r.dispatchEvent(new Event('input'))}
   });
   let down=null,moved=0;
   addEventListener('pointerdown',e=>{down={x:e.screenX,y:e.screenY};moved=0});
   addEventListener('pointermove',e=>{if(!down||!(e.buttons&1))return;const dx=e.screenX-down.x,dy=e.screenY-down.y;
-    if(dx||dy){moved+=Math.abs(dx)+Math.abs(dy);down={x:e.screenX,y:e.screenY};window.mochi.drag(dx,dy)}});
+    const rx=Math.round(dx),ry=Math.round(dy);if(rx||ry){moved+=Math.abs(rx)+Math.abs(ry);down={x:down.x+rx,y:down.y+ry};window.mochi.drag(rx,ry)}});
   addEventListener('pointerup',()=>{down=null});
   addEventListener('click',e=>{if(moved>4){e.stopPropagation();e.preventDefault()}},true);
 }

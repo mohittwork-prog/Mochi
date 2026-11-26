@@ -1,22 +1,30 @@
 // Mochi — a little cat that floats above everything on your Mac and types when you type.
-const { app, BrowserWindow, ipcMain, screen, Tray, Menu, nativeImage } = require('electron');
+const { app, BrowserWindow, ipcMain, screen, Tray, Menu, nativeImage, systemPreferences, shell } = require('electron');
 const path = require('path');
 const fs = require('fs');
 
-let uIOhook = null, UiohookKey = {};
-try { ({ uIOhook, UiohookKey } = require('uiohook-napi')); } catch (e) { console.warn('Global key listening unavailable:', e.message); }
+let uIOhook = null, UiohookKey = {}, hookError = '';
+try { ({ uIOhook, UiohookKey } = require('uiohook-napi')); } catch (e) { hookError = e.message; console.warn('Global key listening unavailable:', e.message); }
 
 const SIZES = { Small: [200, 220], Medium: [280, 308], Large: [380, 418] };
 const LOOKS = [['2D', '2'], ['2.5D', '25'], ['3D', '3'], ['Drawn', 'ink']];
 const COATS = ['Tuxedo', 'Ginger', 'Cream', 'Snow', 'Silver', 'Blue', 'Cocoa', 'Ink', 'Peach'];
 
 const settingsFile = () => path.join(app.getPath('userData'), 'settings.json');
-let S = { size: 'Medium', look: 'ink', coat: 0, clickThrough: false, x: null, y: null };
+let S = { size: 'Medium', look: 'ink', coat: 0, opacity: 100, clickThrough: false, x: null, y: null, seenSettings: false };
 function load() { try { Object.assign(S, JSON.parse(fs.readFileSync(settingsFile(), 'utf8'))); } catch (e) {} }
 function save() { try { fs.writeFileSync(settingsFile(), JSON.stringify(S)); } catch (e) {} }
 
-let win, tray, cursorTimer;
+let win, settingsWin, tray, cursorTimer, keysSeen = 0, hookRunning = false;
 
+/* ---------- keyboard permission ---------- */
+const hasAccess = () => process.platform !== 'darwin' || systemPreferences.isTrustedAccessibilityClient(false);
+function keyStatus() {
+  return { access: hasAccess(), running: hookRunning, available: !!uIOhook, error: hookError, keysSeen };
+}
+function pushStatus() { if (settingsWin && !settingsWin.isDestroyed()) settingsWin.webContents.send('status', keyStatus()); }
+
+/* ---------- the floating cat ---------- */
 function createWindow() {
   const [w, h] = SIZES[S.size] || SIZES.Medium;
   const wa = screen.getPrimaryDisplay().workArea;
@@ -28,58 +36,82 @@ function createWindow() {
     backgroundColor: '#00000000',
     webPreferences: { preload: path.join(__dirname, 'preload.js') }
   });
-  // float above normal windows, full-screen apps and every Space
   win.setAlwaysOnTop(true, 'screen-saver');
   win.setVisibleOnAllWorkspaces(true, { visibleOnFullScreen: true });
   applyClickThrough();
   win.loadFile('widget.html');
-  win.webContents.on('did-finish-load', () => {
-    win.webContents.send('set', 'look', S.look);
-    win.webContents.send('set', 'coat', S.coat);
-  });
+  win.webContents.on('did-finish-load', sendAllToCat);
   win.on('moved', () => { const [x, y] = win.getPosition(); S.x = x; S.y = y; save(); });
-
-  // eyes follow the cursor anywhere on screen
   cursorTimer = setInterval(() => {
     if (!win || win.isDestroyed()) return;
     const p = screen.getCursorScreenPoint(), b = win.getBounds();
     win.webContents.send('mouse', p.x - b.x, p.y - b.y);
   }, 50);
 }
-
+function sendAllToCat() {
+  if (!win || win.isDestroyed()) return;
+  win.webContents.send('set', 'look', S.look);
+  win.webContents.send('set', 'coat', S.coat);
+  win.webContents.send('set', 'op', S.opacity);
+}
 function applyClickThrough() { win.setIgnoreMouseEvents(!!S.clickThrough, { forward: true }); }
-
 function setSize(name) {
+  if (!SIZES[name]) return;
   S.size = name; save();
   const [w, h] = SIZES[name]; const b = win.getBounds();
-  win.setBounds({ x: b.x + b.width - w, y: b.y + b.height - h, width: w, height: h });
-  buildMenu();
+  win.setBounds({ x: Math.round(b.x + b.width - w), y: Math.round(b.y + b.height - h), width: w, height: h });
+}
+function moveToCorner() {
+  const wa = screen.getPrimaryDisplay().workArea, b = win.getBounds();
+  win.setPosition(Math.round(wa.x + wa.width - b.width - 24), Math.round(wa.y + wa.height - b.height - 12));
 }
 
+/* ---------- settings window ---------- */
+function openSettings() {
+  if (settingsWin && !settingsWin.isDestroyed()) { settingsWin.show(); settingsWin.focus(); return; }
+  settingsWin = new BrowserWindow({
+    width: 440, height: 720, minWidth: 380, minHeight: 520, title: 'Mochi Settings',
+    titleBarStyle: 'hiddenInset', show: false, backgroundColor: '#f7e7b4',
+    webPreferences: { preload: path.join(__dirname, 'settings-preload.js') }
+  });
+  settingsWin.loadFile('settings.html');
+  settingsWin.once('ready-to-show', () => { settingsWin.show(); if (process.platform === 'darwin') app.dock && app.dock.show(); });
+  settingsWin.on('closed', () => { settingsWin = null; if (process.platform === 'darwin' && app.dock) app.dock.hide(); });
+  S.seenSettings = true; save();
+}
+
+function applySetting(k, v) {
+  switch (k) {
+    case 'look': if (LOOKS.some(l => l[1] === v)) { S.look = v; win.webContents.send('set', 'look', v); } break;
+    case 'coat': v = +v; if (v >= 0 && v < COATS.length) { S.coat = v; win.webContents.send('set', 'coat', v); } break;
+    case 'opacity': v = Math.max(25, Math.min(100, Math.round(+v))); S.opacity = v; win.webContents.send('set', 'op', v); break;
+    case 'size': setSize(v); break;
+    case 'clickThrough': S.clickThrough = !!v; applyClickThrough(); break;
+    case 'openAtLogin': app.setLoginItemSettings({ openAtLogin: !!v }); break;
+  }
+  save(); buildMenu();
+}
+
+/* ---------- menu bar icon ---------- */
 function buildMenu() {
+  if (!tray) return;
   const menu = Menu.buildFromTemplate([
-    { label: 'Mochi', enabled: false },
+    { label: hasAccess() ? 'Mochi is watching your typing' : 'Mochi can’t see your typing yet', enabled: false },
+    { label: 'Settings…', accelerator: 'Command+,', click: openSettings },
     { type: 'separator' },
-    { label: 'Look', submenu: LOOKS.map(([label, v]) => ({ label, type: 'radio', checked: S.look === v,
-        click: () => { S.look = v; save(); win.webContents.send('set', 'look', v); } })) },
-    { label: 'Coat', submenu: COATS.map((label, i) => ({ label, type: 'radio', checked: S.coat === i,
-        click: () => { S.coat = i; save(); win.webContents.send('set', 'coat', i); } })) },
-    { label: 'Size', submenu: Object.keys(SIZES).map(label => ({ label, type: 'radio', checked: S.size === label, click: () => setSize(label) })) },
+    { label: 'Look', submenu: LOOKS.map(([label, v]) => ({ label, type: 'radio', checked: S.look === v, click: () => applySetting('look', v) })) },
+    { label: 'Coat', submenu: COATS.map((label, i) => ({ label, type: 'radio', checked: S.coat === i, click: () => applySetting('coat', i) })) },
+    { label: 'Size', submenu: Object.keys(SIZES).map(label => ({ label, type: 'radio', checked: S.size === label, click: () => applySetting('size', label) })) },
     { type: 'separator' },
-    { label: 'Let clicks pass through', type: 'checkbox', checked: !!S.clickThrough,
-      click: (item) => { S.clickThrough = item.checked; save(); applyClickThrough(); } },
-    { label: 'Open at login', type: 'checkbox', checked: app.getLoginItemSettings().openAtLogin,
-      click: (item) => app.setLoginItemSettings({ openAtLogin: item.checked }) },
-    { label: 'Move to bottom-right corner', click: () => {
-        const wa = screen.getPrimaryDisplay().workArea, b = win.getBounds();
-        win.setPosition(wa.x + wa.width - b.width - 24, wa.y + wa.height - b.height - 12); } },
+    { label: 'Let clicks pass through', type: 'checkbox', checked: !!S.clickThrough, click: (i) => applySetting('clickThrough', i.checked) },
+    { label: 'Move to bottom-right corner', click: moveToCorner },
     { type: 'separator' },
     { label: 'Quit Mochi', click: () => app.quit() }
   ]);
   tray.setContextMenu(menu);
 }
 
-// map uiohook key codes to browser KeyboardEvent.code names
+/* ---------- global keys ---------- */
 const CODE = {};
 for (const [name, code] of Object.entries(UiohookKey)) {
   let c = name;
@@ -98,23 +130,45 @@ function keyName(code, shift) {
   if (code === 'Slash') return shift ? '?' : '/';
   return KEYNAME[code] || code;
 }
-
 function startKeys() {
-  if (!uIOhook) return;
+  if (!uIOhook || hookRunning || !hasAccess()) return;
   const held = new Set();
   uIOhook.on('keydown', (e) => {
     if (held.has(e.keycode)) return; // ignore auto-repeat
     held.add(e.keycode);
     const code = CODE[e.keycode] || 'KeyF';
-    // only the key's position is sent to the cat; nothing is stored or logged
-    if (win && !win.isDestroyed()) win.webContents.send('key', code, keyName(code, e.shiftKey));
+    keysSeen++;
+    // only which key was pressed reaches the cat; nothing is stored or logged
+    if (win && !win.isDestroyed()) win.webContents.send('key', code, keyName(code, !!e.shiftKey));
+    if (keysSeen % 5 === 1) pushStatus();
   });
   uIOhook.on('keyup', (e) => held.delete(e.keycode));
-  uIOhook.start();
+  try { uIOhook.start(); hookRunning = true; hookError = ''; }
+  catch (e) { hookError = e.message; }
+  pushStatus(); buildMenu();
 }
 
-ipcMain.on('drag', (_e, dx, dy) => { const [x, y] = win.getPosition(); win.setPosition(x + dx, y + dy); });
+/* ---------- IPC ---------- */
+const finite = (n) => Number.isFinite(+n) ? Math.round(+n) : 0;
+ipcMain.on('drag', (_e, dx, dy) => {
+  if (!win || win.isDestroyed()) return;
+  const [x, y] = win.getPosition();
+  win.setPosition(x + finite(dx), y + finite(dy));
+});
+ipcMain.handle('get-settings', () => ({ ...S, openAtLogin: app.getLoginItemSettings().openAtLogin, coats: COATS, looks: LOOKS, sizes: Object.keys(SIZES), status: keyStatus() }));
+ipcMain.on('set', (_e, k, v) => applySetting(k, v));
+ipcMain.on('open-accessibility', () => {
+  if (process.platform === 'darwin') {
+    systemPreferences.isTrustedAccessibilityClient(true); // adds Mochi to the list and shows Apple's prompt
+    shell.openExternal('x-apple.systempreferences:com.apple.preference.security?Privacy_Accessibility');
+  }
+});
+ipcMain.on('open-input-monitoring', () => shell.openExternal('x-apple.systempreferences:com.apple.preference.security?Privacy_ListenEvent'));
+ipcMain.on('restart', () => { app.relaunch(); app.exit(0); });
+ipcMain.on('move-corner', moveToCorner);
+ipcMain.on('quit', () => app.quit());
 
+/* ---------- start ---------- */
 app.whenReady().then(() => {
   if (process.platform === 'darwin' && app.dock) app.dock.hide();
   load();
@@ -124,8 +178,16 @@ app.whenReady().then(() => {
   tray = new Tray(icon);
   tray.setToolTip('Mochi');
   buildMenu();
-  startKeys();
+  if (hasAccess()) startKeys();
+  else {
+    if (process.platform === 'darwin') systemPreferences.isTrustedAccessibilityClient(true);
+    openSettings();
+  }
+  if (!S.seenSettings) openSettings();
+  // notice when permission is granted, without needing a restart where macOS allows it
+  setInterval(() => { if (!hookRunning && hasAccess()) startKeys(); pushStatus(); }, 2000);
 });
 
-app.on('before-quit', () => { clearInterval(cursorTimer); try { uIOhook && uIOhook.stop(); } catch (e) {} });
-app.on('window-all-closed', () => app.quit());
+app.on('activate', openSettings);
+app.on('before-quit', () => { clearInterval(cursorTimer); try { uIOhook && hookRunning && uIOhook.stop(); } catch (e) {} });
+app.on('window-all-closed', (e) => { /* keep running in the menu bar */ });

@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-inline'">
+<title>Mochi Settings</title>
+<style>
+/* VOICE: warm, small, tidy — a Mac preferences window for a pet
+   IDEA: a cat's little ID card: who it is, how it looks, what it may do
+   PICTURE: the keyboard-access card at the top, the one thing that must be right
+   COLOUR and TYPE: honey ground, cream cards, tomato accent; SF Rounded
+   LAYOUT: one calm column of grouped cards, like System Settings */
+:root{color-scheme:light dark;
+  --bg:light-dark(#f7e7b4,#1e1a22);--card:light-dark(#fffaf0,#2a2530);--ink:light-dark(#2b1f1a,#f3ebe4);--soft:light-dark(#76603a,#b9ad9f);
+  --line:light-dark(#ecd9a8,#3b3443);--accent:light-dark(#e04e36,#ff7a5c);--ok:light-dark(#2f8a4c,#5fd08a);--warn:light-dark(#c0392b,#ff8a7a)}
+*{box-sizing:border-box;min-width:0}
+html,body{margin:0;background:var(--bg);color:var(--ink);font:14px/1.45 ui-rounded,"SF Pro Rounded",-apple-system,system-ui,sans-serif;-webkit-user-select:none;user-select:none}
+header{-webkit-app-region:drag;padding:40px 22px 6px;display:flex;align-items:center;gap:12px}
+header svg{width:44px;height:44px;flex:none}
+h1{font-size:22px;font-weight:700;margin:0;line-height:1.1}
+header p{margin:2px 0 0;color:var(--soft);font-size:13px}
+main{padding:10px 18px 24px;display:grid;gap:14px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:14px 16px}
+.card h2{font-size:12px;font-weight:600;color:var(--soft);margin:0 0 10px;letter-spacing:.01em}
+.row{display:flex;align-items:center;justify-content:space-between;gap:12px;min-height:36px}
+.row+.row{border-top:1px solid var(--line);margin-top:6px;padding-top:6px}
+.row small{display:block;color:var(--soft);font-size:12px}
+.pill{display:inline-flex;align-items:center;gap:6px;font-weight:600;font-size:13px;padding:3px 10px;border-radius:99px}
+.pill::before{content:"";width:8px;height:8px;border-radius:50%;background:currentColor}
+.pill.ok{color:var(--ok);background:color-mix(in srgb,var(--ok) 14%,transparent)}
+.pill.bad{color:var(--warn);background:color-mix(in srgb,var(--warn) 14%,transparent)}
+.steps{margin:10px 0 0;padding-left:18px;color:var(--soft);font-size:13px}.steps li{margin:3px 0}
+.btns{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+button{font:inherit;font-weight:600;border:1px solid var(--line);background:var(--bg);color:var(--ink);border-radius:9px;padding:7px 12px;cursor:pointer;min-height:32px}
+button.primary{background:var(--accent);border-color:var(--accent);color:#fff}
+button:focus-visible,input:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+.seg{display:grid;grid-auto-flow:column;grid-auto-columns:1fr;background:var(--bg);border-radius:10px;padding:3px;gap:3px;width:100%}
+.seg button{border:0;background:transparent;padding:6px 4px;font-weight:600;min-height:30px}
+.seg button[aria-pressed=true]{background:var(--card);box-shadow:0 1px 3px rgba(0,0,0,.15)}
+.coats{display:grid;grid-template-columns:repeat(auto-fill,minmax(64px,1fr));gap:8px}
+.coat{display:grid;justify-items:center;gap:4px;border:0;background:none;padding:4px;font-weight:500;font-size:12px;color:var(--soft)}
+.coat i{width:34px;height:34px;border-radius:50%;box-shadow:inset 0 0 0 1px rgba(0,0,0,.15);display:block}
+.coat[aria-pressed=true]{color:var(--ink);font-weight:700}.coat[aria-pressed=true] i{box-shadow:0 0 0 3px var(--accent)}
+input[type=range]{width:100%;accent-color:var(--accent)}
+.sw{appearance:none;width:40px;height:24px;border-radius:12px;background:var(--line);position:relative;cursor:pointer;flex:none;transition:.2s;margin:0}
+.sw::after{content:"";position:absolute;top:2px;left:2px;width:20px;height:20px;border-radius:50%;background:#fff;transition:.2s;box-shadow:0 1px 2px rgba(0,0,0,.3)}
+.sw:checked{background:var(--accent)}.sw:checked::after{left:18px}
+.foot{display:flex;justify-content:space-between;align-items:center;color:var(--soft);font-size:12px;padding:0 4px}
+.count{font-variant-numeric:tabular-nums;font-weight:700;color:var(--ink)}
+</style>
+</head>
+<body>
+<header>
+  <svg viewBox="0 0 44 44" aria-hidden="true"><path d="M8 20 6 6l10 7h12l10-7-2 14c2 3 3 6 3 9 0 9-8 13-17 13S5 38 5 29c0-3 1-6 3-9Z" fill="#1d1c21"/><ellipse cx="16" cy="26" rx="5" ry="5.5" fill="#f4da7a"/><ellipse cx="28" cy="26" rx="5" ry="5.5" fill="#f4da7a"/><circle cx="16" cy="27" r="3.6" fill="#121012"/><circle cx="28" cy="27" r="3.6" fill="#121012"/><path d="M20.5 32h3l-1.5 1.6Z" fill="#f08a99"/></svg>
+  <div><h1>Mochi</h1><p>Your desk cat’s settings</p></div>
+</header>
+<main>
+  <section class="card" id="keysCard">
+    <h2>Keyboard access</h2>
+    <div class="row"><div>So Mochi can type along in any app<small id="keysNote">Checking…</small></div><span class="pill bad" id="keysPill">Not allowed</span></div>
+    <ol class="steps" id="keysSteps">
+      <li>Click <b>Open Accessibility settings</b>.</li>
+      <li>Turn on <b>Mochi</b>. If it’s missing, click <b>+</b> and choose Mochi from Applications.</li>
+      <li>If Mochi is listed under <b>Input Monitoring</b> too, turn it on there.</li>
+      <li>Come back and click <b>Restart Mochi</b>.</li>
+    </ol>
+    <div class="btns" id="keysBtns">
+      <button class="primary" id="openAx" type="button">Open Accessibility settings</button>
+      <button id="openIm" type="button">Input Monitoring</button>
+      <button id="restart" type="button">Restart Mochi</button>
+    </div>
+  </section>
+
+  <section class="card">
+    <h2>Look</h2>
+    <div class="seg" id="looks" role="group" aria-label="Look"></div>
+  </section>
+
+  <section class="card">
+    <h2>Coat</h2>
+    <div class="coats" id="coats" role="group" aria-label="Coat"></div>
+  </section>
+
+  <section class="card">
+    <h2>Size and visibility</h2>
+    <div class="row"><span>Size</span><div class="seg" id="sizes" role="group" aria-label="Size" style="width:220px"></div></div>
+    <div class="row"><label for="op">Opacity</label><span id="opV" class="count">100%</span></div>
+    <input type="range" id="op" min="25" max="100" step="5">
+  </section>
+
+  <section class="card">
+    <h2>Behaviour</h2>
+    <div class="row"><label for="ct">Let clicks pass through<small>Clicks go to the app underneath. You can’t drag or pat Mochi while this is on.</small></label><input class="sw" type="checkbox" id="ct"></div>
+    <div class="row"><label for="login">Open at login</label><input class="sw" type="checkbox" id="login"></div>
+    <div class="row"><span>Position<small>Drag Mochi anywhere on screen.</small></span><button id="corner" type="button">Bottom-right corner</button></div>
+  </section>
+
+  <div class="foot"><span>Keys are only used to move the paws. Nothing is saved or sent.</span><button id="quit" type="button">Quit Mochi</button></div>
+</main>
+<script>
+{
+const api=window.mochiSettings,$=id=>document.getElementById(id);
+const SW=['#1d1c21','#e8924a','#efd6ae','#f7f3ee','#a3a8ae','#7b8a9e','#8a5f45','#232126','#f2b48f'];
+let S={};
+function status(s){
+  const ok=s.access&&s.running;
+  $('keysPill').className='pill '+(ok?'ok':'bad');
+  $('keysPill').textContent=ok?'Allowed':s.access?'Restart needed':'Not allowed';
+  $('keysNote').textContent=ok?'Working — keys seen this session: '+s.keysSeen
+    :!s.available?'The key listener didn’t load: '+(s.error||'unknown error')
+    :s.access?'Access is on. Restart Mochi to start listening.':'macOS hasn’t given Mochi access yet.';
+  $('keysSteps').hidden=ok;$('openAx').hidden=ok;$('openIm').hidden=ok;
+}
+function render(){
+  $('looks').innerHTML=S.looks.map(([l,v])=>`<button type="button" data-v="${v}" aria-pressed="${S.look===v}">${l}</button>`).join('');
+  $('coats').innerHTML=S.coats.map((n,i)=>`<button class="coat" type="button" data-i="${i}" aria-pressed="${S.coat===i}"><i style="background:${SW[i]}"></i>${n}</button>`).join('');
+  $('sizes').innerHTML=S.sizes.map(n=>`<button type="button" data-v="${n}" aria-pressed="${S.size===n}">${n}</button>`).join('');
+  $('op').value=S.opacity;$('opV').textContent=S.opacity+'%';
+  $('ct').checked=!!S.clickThrough;$('login').checked=!!S.openAtLogin;
+}
+function set(k,v){S[k]=v;api.set(k,v);render()}
+$('looks').addEventListener('click',e=>{const b=e.target.closest('button');if(b)set('look',b.dataset.v)});
+$('coats').addEventListener('click',e=>{const b=e.target.closest('button');if(b)set('coat',+b.dataset.i)});
+$('sizes').addEventListener('click',e=>{const b=e.target.closest('button');if(b)set('size',b.dataset.v)});
+$('op').addEventListener('input',e=>{S.opacity=+e.target.value;$('opV').textContent=S.opacity+'%';api.set('opacity',S.opacity)});
+$('ct').addEventListener('change',e=>set('clickThrough',e.target.checked));
+$('login').addEventListener('change',e=>set('openAtLogin',e.target.checked));
+$('openAx').addEventListener('click',()=>api.openAccessibility());
+$('openIm').addEventListener('click',()=>api.openInputMonitoring());
+$('restart').addEventListener('click',()=>api.restart());
+$('corner').addEventListener('click',()=>api.moveCorner());
+$('quit').addEventListener('click',()=>api.quit());
+api.onStatus(status);
+api.get().then(s=>{S=s;render();status(s.status)});
+}
+</script>
+</body>
+</html>
