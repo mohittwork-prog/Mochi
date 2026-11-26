@@ -1,7 +1,7 @@
 {
   "name": "mochi-widget",
   "productName": "Mochi",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "A desktop cat that floats above your apps and types when you type.",
   "main": "main.js",
   "scripts": {
@@ -20,11 +20,14 @@
     "mac": {
       "category": "public.app-category.entertainment",
       "target": "dmg",
-      "identity": "-",
       "extendInfo": {
         "LSUIElement": true,
         "NSAppleEventsUsageDescription": "Mochi watches your typing so the cat can type along."
-      }
+      },
+      "hardenedRuntime": true,
+      "gatekeeperAssess": false,
+      "entitlements": "build/entitlements.mac.plist",
+      "entitlementsInherit": "build/entitlements.mac.plist"
     },
     "files": [
       "main.js",
@@ -54,6 +57,7 @@
     "npmRebuild": false,
     "asarUnpack": [
       "node_modules/uiohook-napi/**"
-    ]
+    ],
+    "afterSign": "scripts/after-sign.js"
   }
 }

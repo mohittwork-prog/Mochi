@@ -15,7 +15,22 @@ jobs:
         with:
           node-version: 22
       - run: npm install
-      - run: npm run dist
+      - name: Build the .dmg installers
+        env:
+          # Optional: add these repository secrets to sign with an Apple Developer ID and notarise,
+          # so the app opens with no warning at all. Without them the app is ad-hoc signed.
+          CSC_LINK: ${{ secrets.MAC_CERT_P12_BASE64 }}
+          CSC_KEY_PASSWORD: ${{ secrets.MAC_CERT_PASSWORD }}
+          APPLE_ID: ${{ secrets.APPLE_ID }}
+          APPLE_APP_SPECIFIC_PASSWORD: ${{ secrets.APPLE_APP_SPECIFIC_PASSWORD }}
+          APPLE_TEAM_ID: ${{ secrets.APPLE_TEAM_ID }}
+        run: |
+          if [ -n "$CSC_LINK" ]; then EXTRA="-c.mac.notarize=true"; else unset CSC_LINK CSC_KEY_PASSWORD; EXTRA=""; fi
+          npx electron-builder --mac dmg --arm64 --publish never $EXTRA
+          npx electron-builder --mac dmg --x64 --publish never $EXTRA
+      - name: Check the app signature
+        run: |
+          for app in dist/mac*/Mochi.app; do codesign --verify --deep --strict --verbose=2 "$app"; done
       - uses: actions/upload-artifact@v4
         with:
           name: Mochi-dmg
