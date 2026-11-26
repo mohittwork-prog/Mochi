@@ -6,7 +6,7 @@
   "main": "main.js",
   "scripts": {
     "start": "electron .",
-    "dist": "electron-builder --mac dmg --arm64 --x64 --publish never"
+    "dist": "electron-builder --mac dmg --arm64 --publish never && electron-builder --mac dmg --x64 --publish never"
   },
   "dependencies": {
     "uiohook-napi": "^1.5.4"
@@ -34,7 +34,7 @@
       "trayTemplate@2x.png"
     ],
     "dmg": {
-      "title": "Mochi",
+      "title": "Mochi ${arch}",
       "contents": [
         {
           "x": 140,
@@ -46,7 +46,8 @@
           "type": "link",
           "path": "/Applications"
         }
-      ]
+      ],
+      "artifactName": "Mochi-${version}-${arch}.dmg"
     },
     "npmRebuild": false
   }
