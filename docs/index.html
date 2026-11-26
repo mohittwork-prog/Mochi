@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Mochi — the desk cat that types when you type</title>
+<meta name="description" content="Mochi is a little cat that floats above your Mac apps and presses the same keys you type.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+body{margin:0;background:#f7dc8f}
+a{color:#2b1f1a}a:hover{color:#e04e36}
+.tryinput:focus{outline:3px solid #e04e36;outline-offset:2px}
+.btn:focus-visible{outline:3px solid #2b1f1a;outline-offset:3px}
+@keyframes bob{50%{transform:translateY(-6px)}}
+@media (max-width:760px){.hide-sm{display:none !important}}
+</style>
+</head>
+<body>
+<div style="min-height: 100vh; background: #f7dc8f; color: #2b1f1a; font-family: Nunito, system-ui, sans-serif; font-size: 17px; line-height: 1.55; overflow-x: clip">
+
+<header style="max-width: 1180px; margin: 0 auto; padding: 22px 24px; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 16px">
+  <a href="#top" style="display: flex; align-items: center; gap: 10px; text-decoration: none; font-family: Fredoka, sans-serif; font-weight: 600; font-size: 26px">
+    <svg width="38" height="38" viewBox="0 0 44 44" aria-hidden="true"><path d="M8 20 6 6l10 7h12l10-7-2 14c2 3 3 6 3 9 0 9-8 13-17 13S5 38 5 29c0-3 1-6 3-9Z" fill="#1d1c21" stroke="#3a2420" stroke-width="2"/><ellipse cx="16" cy="26" rx="5" ry="5.5" fill="#f4da7a"/><ellipse cx="28" cy="26" rx="5" ry="5.5" fill="#f4da7a"/><circle cx="16" cy="27" r="3.6" fill="#121012"/><circle cx="28" cy="27" r="3.6" fill="#121012"/></svg>
+    Mochi
+  </a>
+  <nav style="display: flex; flex-wrap: wrap; align-items: center; gap: 22px; font-weight: 700">
+    <a href="#features" style="text-decoration: none">Features</a>
+    <a href="#moods" style="text-decoration: none">Moods</a>
+    <a href="#privacy" style="text-decoration: none">Privacy</a>
+    <a href="#faq" style="text-decoration: none">FAQ</a>
+    <a class="btn" href="#download" style="text-decoration: none; background: #2b1f1a; color: #fff7e0; padding: 11px 18px; border-radius: 999px; min-height: 44px; box-sizing: border-box; display: inline-flex; align-items: center">Download for Mac</a>
+  </nav>
+</header>
+
+<section id="top" style="max-width: 1180px; margin: 0 auto; padding: 24px 24px 40px; display: flex; flex-wrap: wrap; align-items: center; gap: 40px">
+  <div style="flex: 1 1 420px; min-width: 0">
+    <p style="margin: 0 0 14px; font-weight: 800; color: #b3361f">A desktop companion for macOS</p>
+    <h1 style="margin: 0 0 18px; font-family: Fredoka, sans-serif; font-weight: 600; font-size: clamp(44px, 6vw, 76px); line-height: 1.02; text-wrap: balance">You type.<br>Mochi types too.</h1>
+    <p style="margin: 0 0 28px; font-size: 20px; max-width: 30em">A small cat that floats above your apps and presses the same keys you do, on its own little keyboard. It sparkles when you hit space, sweats when you backspace, and dozes off when you stop.</p>
+    <div style="display: flex; flex-wrap: wrap; gap: 12px; align-items: center">
+      <a class="btn" href="#download" style="text-decoration: none; background: #e04e36; color: #fff; font-weight: 800; padding: 15px 24px; border-radius: 999px; font-size: 18px; min-height: 52px; box-sizing: border-box; display: inline-flex; align-items: center; gap: 10px">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v11M7 10l5 5 5-5M5 20h14"/></svg>
+        Download for Mac
+      </a>
+      <span style="font-size: 15px; color: #6a5430">Apple Silicon and Intel</span>
+    </div>
+  </div>
+
+  <div style="flex: 1 1 440px; min-width: 0; display: flex; flex-direction: column; align-items: center; gap: 16px">
+    <div style="position: relative; width: 100%; max-width: 460px">
+      <svg viewBox="0 0 400 380" style="width: 100%; height: auto; display: block; animation: bob 3.2s ease-in-out infinite" role="img" aria-label="Mochi, a black cat with golden eyes, sitting at a small keyboard">
+        <path d="M262 262 C320 270 346 238 332 196 Q328 184 318 186" fill="none" stroke="#3a2420" stroke-width="26" stroke-linecap="round"/>
+        <path d="M262 262 C320 270 346 238 332 196 Q328 184 318 186" fill="none" stroke="#1d1c21" stroke-width="18" stroke-linecap="round"/>
+        <path d="M200 150 C140 150 120 210 124 262 C127 296 160 300 200 300 C240 300 273 296 276 262 C280 210 260 150 200 150 Z" fill="#1d1c21" stroke="#3a2420" stroke-width="5"/>
+        <path d="M200 200 C178 200 168 226 170 250 C172 270 186 276 200 276 C214 276 228 270 230 250 C232 226 222 200 200 200 Z" fill="#f3efe7"/>
+        <rect x="62" y="262" width="276" height="90" rx="12" fill="#26221f" stroke="#3a2420" stroke-width="5"/>
+        <g fill="#f8f3ea" stroke="#3a2420" stroke-width="1.4">
+          <rect x="76" y="274" width="248" height="13" rx="3" fill="#f8f3ea"/>
+          <rect x="76" y="292" width="248" height="13" rx="3"/>
+          <rect x="76" y="310" width="248" height="13" rx="3"/>
+          <rect x="76" y="328" width="248" height="13" rx="3"/>
+        </g>
+        <g stroke="#26221f" stroke-width="3">
+          <path d="M97 274v67M118 274v67M139 274v67M160 274v67M181 274v67M202 274v67M223 274v67M244 274v67M265 274v67M286 274v67M307 274v67"/>
+        </g>
+        <rect x="78" y="328" width="30" height="13" rx="3" fill="#f0bd5e"/>
+        <rect x="292" y="292" width="30" height="13" rx="3" fill="#f0bd5e"/>
+        <rect x="181" y="310" width="21" height="13" rx="3" id="hitKey" fill="#f8f3ea"/>
+        <path d="M160 214 Q146 250 152 290" fill="none" stroke="#3a2420" stroke-width="30" stroke-linecap="round"/>
+        <path d="M160 214 Q146 250 152 290" fill="none" stroke="#1d1c21" stroke-width="24" stroke-linecap="round"/>
+        <path class="armR" d="M240 214 Q254 250 248 290" fill="none" stroke="#3a2420" stroke-width="30" stroke-linecap="round"/>
+        <path class="armR" d="M240 214 Q254 250 248 290" fill="none" stroke="#1d1c21" stroke-width="24" stroke-linecap="round"/>
+        <ellipse cx="152" cy="294" rx="17" ry="11" fill="#f3efe7" stroke="#3a2420" stroke-width="3"/>
+        <ellipse cx="248" id="pawR" cy="294" rx="17" ry="11" fill="#f3efe7" stroke="#3a2420" stroke-width="3"/>
+        <path d="M110 112 Q94 20 130 14 Q160 14 192 62 Z" fill="#1d1c21" stroke="#3a2420" stroke-width="5" stroke-linejoin="round"/>
+        <path d="M290 112 Q306 20 270 14 Q240 14 208 62 Z" fill="#1d1c21" stroke="#3a2420" stroke-width="5" stroke-linejoin="round"/>
+        <path d="M124 96 Q114 40 134 36 Q150 36 172 62 Z" fill="#ffb3bf"/>
+        <path d="M276 96 Q286 40 266 36 Q250 36 228 62 Z" fill="#ffb3bf"/>
+        <ellipse cx="200" cy="114" rx="94" ry="74" fill="#1d1c21" stroke="#3a2420" stroke-width="5"/>
+        <path d="M170 140 Q200 168 230 140 Q218 158 200 158 Q182 158 170 140 Z" fill="#f3efe7"/>
+        <g >
+          <ellipse cx="160" cy="112" rx="27" ry="29" fill="#f4da7a" stroke="#3a2420" stroke-width="4"/>
+          <ellipse cx="240" cy="112" rx="27" ry="29" fill="#f4da7a" stroke="#3a2420" stroke-width="4"/>
+          <ellipse id="pupL" cx="160" cy="115" rx="21" ry="23" fill="#121012"/>
+          <ellipse id="pupR" cx="240" cy="115" rx="21" ry="23" fill="#121012"/>
+        </g>
+        <g id="gSparkle" style="display: none" fill="#fff">
+          <circle cx="153" cy="106" r="6"/><circle cx="233" cy="106" r="6"/>
+          <path d="M168 118q1 6 7 7q-6 1-7 7q-1-6-7-7q6-1 7-7Z" fill="#bfe3ff"/><path d="M248 118q1 6 7 7q-6 1-7 7q-1-6-7-7q6-1 7-7Z" fill="#bfe3ff"/>
+        </g>
+        <g id="gSmirk" style="display: none">
+          <path d="M131 82 H190 V106 Q160 100 131 106 Z" fill="#1d1c21"/><path d="M210 82 H270 V98 Q240 94 210 106 Z" fill="#1d1c21"/>
+          <path d="M133 106 Q160 100 188 106 M212 106 Q240 94 268 98" fill="none" stroke="#3a2420" stroke-width="4" stroke-linecap="round"/>
+        </g>
+        <g id="gSad" style="display: none">
+          <path d="M131 80 H190 V100 L131 112 Z" fill="#1d1c21"/><path d="M210 80 H270 V112 L210 100 Z" fill="#1d1c21"/>
+          <path d="M133 112 L188 100 M212 100 L268 112" stroke="#3a2420" stroke-width="4" stroke-linecap="round"/>
+          <path d="M142 140c4 6 6 9 6 12a6 6 0 0 1-12 0c0-3 2-6 6-12z" fill="#cdeeff" stroke="#3a2420" stroke-width="2.5"/>
+        </g>
+        <g style="display: none" fill="none" stroke="#f4da7a" stroke-width="5" stroke-linecap="round">
+          <path d="M137 112 Q160 130 183 112"/><path d="M217 112 Q240 130 263 112"/>
+        </g>
+        <path d="M195 133 Q200 131 205 133 Q203 137 200 138 Q197 137 195 133 Z" fill="#f08a99"/>
+        <path id="mouth" d="M193 145 Q200 145 207 145" fill="none" stroke="#4a2e26" stroke-width="3" stroke-linecap="round"/>
+      </svg>
+    </div>
+    <label for="try" style="font-weight: 800; font-size: 15px">Try it: type something to Mochi</label>
+    <input id="try" class="tryinput" type="text" autocomplete="off" placeholder="hello mochi" style="width: 100%; max-width: 380px; box-sizing: border-box; font: 600 17px Nunito, system-ui, sans-serif; padding: 12px 16px; border-radius: 14px; border: 3px solid #3a2420; background: #fffaf0; color: #2b1f1a; min-height: 50px">
+    <p id="moodLine" aria-live="polite" style="margin: 0; font-size: 14px; color: #6a5430">Mochi is listening.</p>
+  </div>
+</section>
+
+<section id="features" style="background: #fffaf0; border-top: 4px solid #3a2420; border-bottom: 4px solid #3a2420">
+  <div style="max-width: 1180px; margin: 0 auto; padding: 72px 24px">
+    <h2 style="margin: 0 0 10px; font-family: Fredoka, sans-serif; font-weight: 600; font-size: clamp(32px, 4vw, 46px); line-height: 1.08; max-width: 18em">A tiny coworker who never stops paying attention</h2>
+    <p style="margin: 0 0 40px; max-width: 36em; color: #5b4a30">Mochi lives in the corner of your screen, on top of every window, and reacts to everything you type.</p>
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 18px">
+      <div style="background: #f7dc8f; border: 3px solid #3a2420; border-radius: 20px; padding: 24px">
+        <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="#2b1f1a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="6" width="20" height="12" rx="2"/><path d="M6 10h.01M10 10h.01M14 10h.01M18 10h.01M7 14h10"/></svg>
+        <h3 style="margin: 12px 0 6px; font-family: Fredoka, sans-serif; font-weight: 600; font-size: 22px">Real keys, real paws</h3>
+        <p style="margin: 0">Every key you press, Mochi’s paw lands on the same key on its keyboard. Type fast and it goes into a frenzy.</p>
+      </div>
+      <div style="background: #f7dc8f; border: 3px solid #3a2420; border-radius: 20px; padding: 24px">
+        <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="#2b1f1a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M8 14s1.5 2 4 2 4-2 4-2M9 9h.01M15 9h.01"/></svg>
+        <h3 style="margin: 12px 0 6px; font-family: Fredoka, sans-serif; font-weight: 600; font-size: 22px">A face for every key</h3>
+        <p style="margin: 0">Eyes, ears and mouth change as you type: sparkles on space, a smirk on shift, a sweat drop on backspace.</p>
+      </div>
+      <div style="background: #f7dc8f; border: 3px solid #3a2420; border-radius: 20px; padding: 24px">
+        <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="#2b1f1a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="8" height="8" rx="2"/><rect x="13" y="3" width="8" height="8" rx="4"/><rect x="3" y="13" width="8" height="8" rx="4"/><path d="M13 21l4-8 4 8z"/></svg>
+        <h3 style="margin: 12px 0 6px; font-family: Fredoka, sans-serif; font-weight: 600; font-size: 22px">Four looks, nine coats</h3>
+        <p style="margin: 0">Flat 2D, soft 2.5D, real 3D or a hand-drawn style, in Tuxedo, Ginger, Cream, Snow, Silver, Blue, Cocoa, Ink or Peach.</p>
+      </div>
+      <div style="background: #f7dc8f; border: 3px solid #3a2420; border-radius: 20px; padding: 24px">
+        <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="#2b1f1a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="4" width="20" height="14" rx="2"/><rect x="13" y="10" width="7" height="6" rx="1"/><path d="M8 21h8"/></svg>
+        <h3 style="margin: 12px 0 6px; font-family: Fredoka, sans-serif; font-weight: 600; font-size: 22px">Floats above everything</h3>
+        <p style="margin: 0">See-through, always on top, even over full-screen apps and on every desktop. Drag it anywhere.</p>
+      </div>
+      <div style="background: #f7dc8f; border: 3px solid #3a2420; border-radius: 20px; padding: 24px">
+        <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="#2b1f1a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></svg>
+        <h3 style="margin: 12px 0 6px; font-family: Fredoka, sans-serif; font-weight: 600; font-size: 22px">Naps when you do</h3>
+        <p style="margin: 0">Stop typing and Mochi gets drowsy, then curls up to sleep. One keypress wakes it up again.</p>
+      </div>
+      <div style="background: #f7dc8f; border: 3px solid #3a2420; border-radius: 20px; padding: 24px">
+        <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="#2b1f1a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 11c0-4 2-7 5-7s5 3 5 7"/><path d="M4 13c2 5 5 8 8 8s6-3 8-8"/><path d="M9 13h.01M15 13h.01"/></svg>
+        <h3 style="margin: 12px 0 6px; font-family: Fredoka, sans-serif; font-weight: 600; font-size: 22px">Pat-able</h3>
+        <p style="margin: 0">Stroke its head with your cursor and it purrs, eyes closed, ears relaxed. The eyes follow your mouse too.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="moods" style="max-width: 1180px; margin: 0 auto; padding: 72px 24px">
+  <h2 style="margin: 0 0 10px; font-family: Fredoka, sans-serif; font-weight: 600; font-size: clamp(32px, 4vw, 46px); line-height: 1.08">What your keys do to Mochi</h2>
+  <p style="margin: 0 0 36px; max-width: 36em; color: #5b4a30">A few of the moods you’ll see while you work.</p>
+  <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 16px">
+    <div style="background: #fffaf0; border: 3px solid #3a2420; border-radius: 20px; padding: 18px 14px; text-align: center">
+      <svg viewBox="0 0 100 90" width="104" height="94" aria-hidden="true"><path d="M18 40 14 6l26 18M82 40l4-34-26 18" fill="#1d1c21" stroke="#3a2420" stroke-width="3" stroke-linejoin="round"/><ellipse cx="50" cy="52" rx="40" ry="34" fill="#1d1c21" stroke="#3a2420" stroke-width="3"/><ellipse cx="35" cy="50" rx="11" ry="12" fill="#f4da7a"/><ellipse cx="65" cy="50" rx="11" ry="12" fill="#f4da7a"/><circle cx="35" cy="51" r="8.5" fill="#121012"/><circle cx="65" cy="51" r="8.5" fill="#121012"/><circle cx="32" cy="47" r="3" fill="#fff"/><circle cx="62" cy="47" r="3" fill="#fff"/><path d="M45 72q5-4 10 0" stroke="#f4da7a" stroke-width="2.5" fill="none" stroke-linecap="round"/></svg>
+      <p style="margin: 8px 0 2px; font-family: Fredoka, sans-serif; font-weight: 600; font-size: 20px">Space</p>
+      <p style="margin: 0; font-size: 15px; color: #5b4a30">Sparkly eyes</p>
+    </div>
+    <div style="background: #fffaf0; border: 3px solid #3a2420; border-radius: 20px; padding: 18px 14px; text-align: center">
+      <svg viewBox="0 0 100 90" width="104" height="94" aria-hidden="true"><path d="M20 40 12 10l28 14M82 38l6-30-26 16" fill="#1d1c21" stroke="#3a2420" stroke-width="3" stroke-linejoin="round"/><ellipse cx="50" cy="52" rx="40" ry="34" fill="#1d1c21" stroke="#3a2420" stroke-width="3"/><ellipse cx="35" cy="50" rx="11" ry="12" fill="#f4da7a"/><ellipse cx="65" cy="50" rx="11" ry="12" fill="#f4da7a"/><circle cx="39" cy="53" r="7" fill="#121012"/><circle cx="69" cy="53" r="7" fill="#121012"/><path d="M23 37h24v9H23zM53 37h24v9H53z" fill="#1d1c21"/><path d="M24 46h22M54 46h22" stroke="#3a2420" stroke-width="2.5"/><path d="M42 72q6 1 10 0t8-5" stroke="#f4da7a" stroke-width="2.5" fill="none" stroke-linecap="round"/></svg>
+      <p style="margin: 8px 0 2px; font-family: Fredoka, sans-serif; font-weight: 600; font-size: 20px">Shift</p>
+      <p style="margin: 0; font-size: 15px; color: #5b4a30">A knowing smirk</p>
+    </div>
+    <div style="background: #fffaf0; border: 3px solid #3a2420; border-radius: 20px; padding: 18px 14px; text-align: center">
+      <svg viewBox="0 0 100 90" width="104" height="94" aria-hidden="true"><path d="M16 46 4 20l30 6M84 46l12-26-30 6" fill="#1d1c21" stroke="#3a2420" stroke-width="3" stroke-linejoin="round"/><ellipse cx="50" cy="52" rx="40" ry="34" fill="#1d1c21" stroke="#3a2420" stroke-width="3"/><ellipse cx="35" cy="52" rx="11" ry="12" fill="#f4da7a"/><ellipse cx="65" cy="52" rx="11" ry="12" fill="#f4da7a"/><circle cx="35" cy="55" r="8" fill="#121012"/><circle cx="65" cy="55" r="8" fill="#121012"/><path d="M22 36h26v10L22 52zM52 36h26v16L52 46z" fill="#1d1c21"/><path d="M24 51l23-5M53 46l23 5" stroke="#3a2420" stroke-width="2.5"/><path d="M24 64c2 3 3 4.5 3 6a3 3 0 0 1-6 0c0-1.5 1-3 3-6z" fill="#cdeeff"/><path d="M44 75q6-6 12 0" stroke="#f4da7a" stroke-width="2.5" fill="none" stroke-linecap="round"/></svg>
+      <p style="margin: 8px 0 2px; font-family: Fredoka, sans-serif; font-weight: 600; font-size: 20px">Backspace</p>
+      <p style="margin: 0; font-size: 15px; color: #5b4a30">Oops, a tear</p>
+    </div>
+    <div style="background: #fffaf0; border: 3px solid #3a2420; border-radius: 20px; padding: 18px 14px; text-align: center">
+      <svg viewBox="0 0 100 90" width="104" height="94" aria-hidden="true"><path d="M16 44 0 30l30-2M84 44l16-14-30-2" fill="#1d1c21" stroke="#3a2420" stroke-width="3" stroke-linejoin="round"/><ellipse cx="50" cy="52" rx="40" ry="34" fill="#1d1c21" stroke="#3a2420" stroke-width="3"/><ellipse cx="35" cy="52" rx="11" ry="12" fill="#f4da7a"/><ellipse cx="65" cy="52" rx="11" ry="12" fill="#f4da7a"/><circle cx="36" cy="55" r="6" fill="#121012"/><circle cx="64" cy="55" r="6" fill="#121012"/><path d="M22 36h26v16L22 42zM52 36h26v6L52 52z" fill="#1d1c21"/><path d="M24 43l23 8M53 51l23-8" stroke="#3a2420" stroke-width="2.5"/><path d="M42 74l4-4 4 4 4-4 4 4" stroke="#f4da7a" stroke-width="2.5" fill="none" stroke-linejoin="round"/></svg>
+      <p style="margin: 8px 0 2px; font-family: Fredoka, sans-serif; font-weight: 600; font-size: 20px">Lots of backspace</p>
+      <p style="margin: 0; font-size: 15px; color: #5b4a30">Grumpy, ears back</p>
+    </div>
+    <div style="background: #fffaf0; border: 3px solid #3a2420; border-radius: 20px; padding: 18px 14px; text-align: center">
+      <svg viewBox="0 0 100 90" width="104" height="94" aria-hidden="true"><path d="M20 40 14 2l26 22M80 40l6-38-26 22" fill="#1d1c21" stroke="#3a2420" stroke-width="3" stroke-linejoin="round"/><ellipse cx="50" cy="52" rx="40" ry="34" fill="#1d1c21" stroke="#3a2420" stroke-width="3"/><ellipse cx="35" cy="50" rx="12" ry="13" fill="#f4da7a"/><ellipse cx="65" cy="50" rx="12" ry="13" fill="#f4da7a"/><circle cx="35" cy="49" r="4.5" fill="#121012"/><circle cx="65" cy="49" r="4.5" fill="#121012"/><ellipse cx="50" cy="73" rx="4" ry="5" fill="#6b2f2f"/></svg>
+      <p style="margin: 8px 0 2px; font-family: Fredoka, sans-serif; font-weight: 600; font-size: 20px">Typing fast</p>
+      <p style="margin: 0; font-size: 15px; color: #5b4a30">Wide-eyed frenzy</p>
+    </div>
+    <div style="background: #fffaf0; border: 3px solid #3a2420; border-radius: 20px; padding: 18px 14px; text-align: center">
+      <svg viewBox="0 0 100 90" width="104" height="94" aria-hidden="true"><path d="M16 44 6 14l28 12M84 44l10-30-28 12" fill="#1d1c21" stroke="#3a2420" stroke-width="3" stroke-linejoin="round"/><ellipse cx="50" cy="54" rx="40" ry="32" fill="#1d1c21" stroke="#3a2420" stroke-width="3"/><path d="M24 52q11 9 22 0M54 52q11 9 22 0" stroke="#f4da7a" stroke-width="3.5" fill="none" stroke-linecap="round"/><ellipse cx="50" cy="72" rx="2.5" ry="3" fill="#6b2f2f"/><text x="76" y="22" font-family="Fredoka, sans-serif" font-weight="600" font-size="14" fill="#6a5430">z z</text></svg>
+      <p style="margin: 8px 0 2px; font-family: Fredoka, sans-serif; font-weight: 600; font-size: 20px">No typing</p>
+      <p style="margin: 0; font-size: 15px; color: #5b4a30">Nap time</p>
+    </div>
+  </div>
+</section>
+
+<section id="privacy" style="background: #1d1c21; color: #fff7e0">
+  <div style="max-width: 1180px; margin: 0 auto; padding: 72px 24px; display: flex; flex-wrap: wrap; gap: 40px; align-items: center">
+    <div style="flex: 1 1 420px; min-width: 0">
+      <h2 style="margin: 0 0 14px; font-family: Fredoka, sans-serif; font-weight: 600; font-size: clamp(32px, 4vw, 46px); line-height: 1.08; color: #f4da7a">It watches your keys. It never keeps them.</h2>
+      <p style="margin: 0 0 14px; max-width: 34em">To press the same keys you do, Mochi needs to see which keys you press, so macOS asks you to allow it under Accessibility.</p>
+      <p style="margin: 0; max-width: 34em">That’s all it uses them for: which key it is, to move a paw. Nothing you type is saved, logged or sent anywhere, and Mochi never goes online.</p>
+    </div>
+    <div style="flex: 1 1 340px; min-width: 0; display: grid; gap: 12px">
+      <div style="border: 2px solid #4a3f52; border-radius: 16px; padding: 16px 18px; display: flex; gap: 14px; align-items: flex-start"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#f4da7a" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex: none; margin-top: 2px"><path d="M5 12l5 5L20 7"/></svg><span>Sees which key, only to animate the paw</span></div>
+      <div style="border: 2px solid #4a3f52; border-radius: 16px; padding: 16px 18px; display: flex; gap: 14px; align-items: flex-start"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#f4da7a" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex: none; margin-top: 2px"><path d="M5 12l5 5L20 7"/></svg><span>No logs, no history, no text stored</span></div>
+      <div style="border: 2px solid #4a3f52; border-radius: 16px; padding: 16px 18px; display: flex; gap: 14px; align-items: flex-start"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#f4da7a" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex: none; margin-top: 2px"><path d="M5 12l5 5L20 7"/></svg><span>Never connects to the internet</span></div>
+    </div>
+  </div>
+</section>
+
+<section id="download" style="max-width: 1180px; margin: 0 auto; padding: 72px 24px">
+  <div style="background: #fffaf0; border: 4px solid #3a2420; border-radius: 28px; padding: clamp(24px, 4vw, 48px); display: flex; flex-wrap: wrap; gap: 36px">
+    <div style="flex: 1 1 380px; min-width: 0">
+      <h2 style="margin: 0 0 12px; font-family: Fredoka, sans-serif; font-weight: 600; font-size: clamp(32px, 4vw, 46px); line-height: 1.08">Get Mochi for your Mac</h2>
+      <p style="margin: 0 0 24px; color: #5b4a30">For macOS on Apple Silicon (M1 and later) and Intel Macs.</p>
+      <div style="display: flex; flex-wrap: wrap; gap: 12px">
+        <a class="btn" href="https://github.com/mohittwork-prog/Mochi/releases/latest/download/Mochi-arm64.dmg" style="text-decoration: none; background: #e04e36; color: #fff; font-weight: 800; padding: 15px 22px; border-radius: 999px; min-height: 52px; box-sizing: border-box; display: inline-flex; align-items: center">Download for Apple Silicon</a>
+        <a class="btn" href="https://github.com/mohittwork-prog/Mochi/releases/latest/download/Mochi-x64.dmg" style="text-decoration: none; background: #fff; color: #2b1f1a; border: 3px solid #3a2420; font-weight: 800; padding: 12px 22px; border-radius: 999px; min-height: 52px; box-sizing: border-box; display: inline-flex; align-items: center">Download for Intel</a>
+      </div>
+      <p style="margin: 14px 0 0; font-size: 14px; color: #6a5430">Not sure which? Apple menu → About This Mac. “Chip: Apple M…” means Apple Silicon.</p>
+    </div>
+    <ol style="flex: 1 1 380px; min-width: 0; margin: 0; padding: 0; list-style: none; display: grid; gap: 14px">
+      <li style="display: flex; gap: 14px"><span style="flex: none; width: 34px; height: 34px; border-radius: 50%; background: #f7dc8f; border: 3px solid #3a2420; display: grid; place-items: center; font-family: Fredoka, sans-serif; font-weight: 600">1</span><span>Open the .dmg and drag Mochi into Applications.</span></li>
+      <li style="display: flex; gap: 14px"><span style="flex: none; width: 34px; height: 34px; border-radius: 50%; background: #f7dc8f; border: 3px solid #3a2420; display: grid; place-items: center; font-family: Fredoka, sans-serif; font-weight: 600">2</span><span>The first time, right-click Mochi and choose Open.</span></li>
+      <li style="display: flex; gap: 14px"><span style="flex: none; width: 34px; height: 34px; border-radius: 50%; background: #f7dc8f; border: 3px solid #3a2420; display: grid; place-items: center; font-family: Fredoka, sans-serif; font-weight: 600">3</span><span>Turn on Mochi in System Settings → Privacy &amp; Security → Accessibility.</span></li>
+      <li style="display: flex; gap: 14px"><span style="flex: none; width: 34px; height: 34px; border-radius: 50%; background: #f7dc8f; border: 3px solid #3a2420; display: grid; place-items: center; font-family: Fredoka, sans-serif; font-weight: 600">4</span><span>Start typing. Mochi’s settings live under the cat in your menu bar.</span></li>
+    </ol>
+  </div>
+</section>
+
+<section id="faq" style="max-width: 860px; margin: 0 auto; padding: 0 24px 80px">
+  <h2 style="margin: 0 0 20px; font-family: Fredoka, sans-serif; font-weight: 600; font-size: clamp(32px, 4vw, 46px); line-height: 1.08">Questions</h2>
+  <details style="border-top: 3px solid #3a2420; padding: 16px 0">
+    <summary style="font-weight: 800; font-size: 19px; cursor: pointer; min-height: 32px">Is Mochi a keylogger?</summary>
+    <p style="margin: 10px 0 0">No. It only uses which key you pressed to move a paw and change its face, then forgets it. Nothing is written to disk or sent anywhere.</p>
+  </details>
+  <details style="border-top: 3px solid #3a2420; padding: 16px 0">
+    <summary style="font-weight: 800; font-size: 19px; cursor: pointer; min-height: 32px">Why does macOS ask for Accessibility access?</summary>
+    <p style="margin: 10px 0 0">macOS hides your typing in other apps from everything unless you allow it. Without it, Mochi can only see keys typed into Mochi itself.</p>
+  </details>
+  <details style="border-top: 3px solid #3a2420; padding: 16px 0">
+    <summary style="font-weight: 800; font-size: 19px; cursor: pointer; min-height: 32px">macOS says Mochi is “damaged”. What now?</summary>
+    <p style="margin: 10px 0 0">Mochi isn’t notarised by Apple yet, so macOS is being cautious. Right-click it and choose Open, or run <code style="background: #f7dc8f; padding: 2px 6px; border-radius: 6px">xattr -cr /Applications/Mochi.app</code> in Terminal once.</p>
+  </details>
+  <details style="border-top: 3px solid #3a2420; border-bottom: 3px solid #3a2420; padding: 16px 0">
+    <summary style="font-weight: 800; font-size: 19px; cursor: pointer; min-height: 32px">Will it get in the way?</summary>
+    <p style="margin: 10px 0 0">Drag it to any corner, shrink it, make it see-through, or turn on “Let clicks pass through” so clicks go straight to the app underneath.</p>
+  </details>
+</section>
+
+<footer style="border-top: 4px solid #3a2420; background: #fffaf0">
+  <div style="max-width: 1180px; margin: 0 auto; padding: 28px 24px; display: flex; flex-wrap: wrap; justify-content: space-between; gap: 16px; font-size: 15px; color: #5b4a30">
+    <span>Mochi · a desk cat for macOS</span>
+    <span>Made with paws and a lot of keystrokes</span>
+  </div>
+</footer>
+</div>
+<script>
+{
+const $=id=>document.getElementById(id);
+const M={
+  calm:{l:'Mochi is listening.',m:'M193 145 Q200 145 207 145',p:[160,240,115,21,23]},
+  sparkle:{l:'Space! Sparkly eyes.',m:'M186 141 Q193 154 200 142 Q207 154 214 141',p:[160,240,115,21,23],g:'gSparkle'},
+  smirk:{l:'Shift. Mochi smirks.',m:'M189 146 Q197 147 203 145 Q209 143 213 137',p:[168,248,115,21,23],g:'gSmirk'},
+  sad:{l:'Backspace. A little tear.',m:'M190 150 Q200 140 210 150',p:[160,240,118,21,23],g:'gSad'},
+  wide:{l:'A question? Wide eyes.',m:'M197 145 Q200 139 203 145 Q200 151 197 145',p:[160,240,115,12,13]}};
+let t1,t2;
+function mood(n){const v=M[n];['gSparkle','gSmirk','gSad'].forEach(g=>$(g).style.display=v.g===g?'inline':'none');
+  $('mouth').setAttribute('d',v.m);const[a,b,y,rx,ry]=v.p;
+  [['pupL',a],['pupR',b]].forEach(([id,x])=>{const e=$(id);e.setAttribute('cx',x);e.setAttribute('cy',y);e.setAttribute('rx',rx);e.setAttribute('ry',ry)});
+  $('moodLine').textContent=v.l}
+function tap(on){document.querySelectorAll('.armR').forEach(p=>p.setAttribute('d','M240 214 Q254 250 248 '+(on?302:290)));
+  $('pawR').setAttribute('cy',on?306:294);$('hitKey').setAttribute('fill',on?'#e04e36':'#f8f3ea')}
+$('try').addEventListener('keydown',e=>{const k=e.key;
+  mood(k===' '||k==='Enter'?'sparkle':k==='Shift'?'smirk':k==='Backspace'?'sad':k==='?'?'wide':'calm');
+  tap(true);clearTimeout(t1);t1=setTimeout(()=>tap(false),130);clearTimeout(t2);t2=setTimeout(()=>mood('calm'),1100)});
+}
+</script>
+</body>
+</html>

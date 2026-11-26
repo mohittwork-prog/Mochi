@@ -49,7 +49,7 @@
           "path": "/Applications"
         }
       ],
-      "artifactName": "Mochi-${version}-${arch}.dmg"
+      "artifactName": "Mochi-${arch}.dmg"
     },
     "npmRebuild": false,
     "asarUnpack": [
