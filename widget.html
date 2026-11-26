@@ -81,7 +81,6 @@ h1{font:600 clamp(32px,5vw,48px)/1.05 Fredoka,Nunito,sans-serif;margin:0 0 8px;t
 .pupIn{transform-box:fill-box;transform-origin:center;transition:transform .15s}
 .ears{transition:transform .15s}
 .bang{font:700 34px Fredoka,sans-serif;fill:var(--accent);opacity:0;transition:opacity .1s}
-#cat.frenzy .pupIn{transform:scale(.55)}
 #cat.frenzy .ears{transform:translateY(-7px)}
 .bang{display:none}
 #cat.ink .nose{stroke:#3a2420;stroke-width:1.8;stroke-linejoin:round}
@@ -92,7 +91,7 @@ h1{font:600 clamp(32px,5vw,48px)/1.05 Fredoka,Nunito,sans-serif;margin:0 0 8px;t
 #cat.ink .hatch{display:none}
 #cat.ink .fur{display:none}
 #cat.ink .base{display:none}#cat.ink .top{stroke:#3a2420;stroke-width:1.4}
-#cat.ink .mouth{stroke:#4a2e26;stroke-width:3;d:path("M193 140 Q196.5 140 200 140 Q203.5 140 207 140")}
+#cat.ink .mouth{stroke:var(--mouthc,#4a2e26);stroke-width:3.4;d:path("M193 140 Q196.5 140 200 140 Q203.5 140 207 140")}
 /* ears follow the mood */
 .ear{transform-box:view-box;transition:transform .22s cubic-bezier(.3,1.5,.5,1)}
 .earL{transform-origin:152px 96px}.earR{transform-origin:248px 96px}
@@ -109,7 +108,6 @@ h1{font:600 clamp(32px,5vw,48px)/1.05 Fredoka,Nunito,sans-serif;margin:0 0 8px;t
 /* mouth follows the mood, and chatters while you type */
 .mouth{transition:d .12s ease-out,fill .12s}
 #cat.chomp .mouth{d:path("M195 139 Q200 133 205 139 Q200 146 195 139");fill:#6b2f2f}
-#cat.frenzy .mouth{d:path("M193 139 Q200 129 207 139 Q200 151 193 139");fill:#6b2f2f}
 #cat[data-expr=happy] .mouth,#cat[data-expr=star] .mouth,#cat[data-state=happy] .mouth{d:path("M186 135 Q193 150 200 137 Q207 150 214 135");fill:none}
 #cat[data-expr=wide] .mouth{d:path("M196 140 Q200 131 204 140 Q200 149 196 140");fill:#6b2f2f}
 #cat[data-expr=sad] .mouth{d:path("M190 146 Q195 137 200 139 Q205 137 210 146");fill:none}
@@ -143,8 +141,6 @@ h1{font:600 clamp(32px,5vw,48px)/1.05 Fredoka,Nunito,sans-serif;margin:0 0 8px;t
 #cat.ink[data-expr=happy] .eyeball,#cat.ink[data-state=happy] .eyeball{display:none}#cat.ink[data-expr=happy] .happyD,#cat.ink[data-state=happy] .happyD,#cat.ink[data-state=happy] .ex-ring{display:inline}#cat.ink[data-state=happy] .happyEye{display:none}
 .pupD{transform-box:fill-box;transform-origin:center;transition:transform .15s}
 #cat.ink[data-expr=wide] .pupD{transform:translateY(-3px) scale(.62)}
-#cat.ink.frenzy .pupD{transform:translateY(-3px) scale(.5)}
-#cat.ink.frenzy .lidN{display:none}
 .tw{transform-box:fill-box;transform-origin:center;animation:tw 1s ease-in-out infinite}.tw+.tw{animation-delay:-.5s}
 @keyframes tw{50%{transform:scale(.55) rotate(20deg)}}
 @media(prefers-reduced-motion:reduce){.tw{animation:none}}
@@ -624,7 +620,7 @@ function render3(now){
   if(st==='asleep')tp=.3;
   yaw+=(ty-yaw)*.08;pitch+=(tp-pitch)*.08;
   camX+=(yaw*.25-camX)*.05;camY+=(-pitch*.1-camY)*.05;
-  let eo=st==='asleep'||st==='happy'?.03:st==='sleepy'?.4:fr?1.25:1;
+  let eo=st==='asleep'||st==='happy'?.03:st==='sleepy'?.4:1;
   const ex3=EX3[curEyes]||0;
   if(st==='awake'){if(ex3===1||ex3===4)eo=0;else if(ex3>=2&&ex3<=5)eo=1.15;if(curEyes==='smirk')eo=.45;}
   if(blinkUntil>now)eo=.05;
@@ -654,7 +650,7 @@ const sw=$('swatches');
 sw.innerHTML=coats.map((c,i)=>`<button class="sw" type="button" data-i="${i}" style="background:${c.c}" aria-label="${c.n}" title="${c.n}"></button>`).join('');
 function apply(){
   const c=coats[S.coat]||coats[0];
-  cat.style.setProperty('--coat',c.c);cat.style.setProperty('--belly',c.b);cat.style.setProperty('--paw',c.p?c.b:c.c);cat.style.setProperty('--nose',c.z||'#f08a99');cat.style.setProperty('--fur',c.w?'rgba(255,255,255,.22)':'rgba(0,0,0,.14)');
+  cat.style.setProperty('--coat',c.c);cat.style.setProperty('--belly',c.b);cat.style.setProperty('--paw',c.p?c.b:c.c);cat.style.setProperty('--nose',c.z||'#f08a99');cat.style.setProperty('--mouthc',c.w?'#efe4d0':'#4a2e26');cat.style.setProperty('--fur',c.w?'rgba(255,255,255,.22)':'rgba(0,0,0,.14)');
   cat.style.setProperty('--inkline',c.w?'rgba(255,255,255,.85)':'rgba(26,23,24,.55)');cat.style.setProperty('--hatch',c.w?'#fff':'#e46a7c');
   cat.style.setProperty('--iris',c.i||'#4a2f25');cat.style.setProperty('--whisker',c.w||'#3a2a24');
   $('coatName').textContent=c.n;
@@ -704,7 +700,7 @@ const EMO={
   question:'<svg viewBox="0 0 60 60"><path class="line" d="M19 18a11 11 0 1 1 15 10c-3 1.5-4 3.5-4 7v3" style="stroke:#fff;stroke-width:9"/><path class="line" d="M19 18a11 11 0 1 1 15 10c-3 1.5-4 3.5-4 7v3"/><circle class="ink" cx="30" cy="49" r="4.5"/></svg>',
   scribble:'<svg viewBox="0 0 60 60"><path class="line" d="M27 30a3 3 0 1 1 6 0a7 7 0 1 1-14 0a11 11 0 1 1 22 0a15 15 0 1 1-30 0" style="stroke:#fff;stroke-width:8"/><path class="line" d="M27 30a3 3 0 1 1 6 0a7 7 0 1 1-14 0a11 11 0 1 1 22 0a15 15 0 1 1-30 0"/></svg>'};
 const EXPR={surprised:['wide','excl',800],proud:['star','sparkle',1100],oops:['sad','sweat',900],angry:['angry','anger',1500],
-  happy:['happy','',420],sparkle:['star','',650],love:['happy','heart',1500],question:['wide','question',1000],smirk:['smirk','',1000]};
+  happy:['happy','',420],sparkle:['star','',800],love:['happy','heart',1500],question:['wide','question',1000],smirk:['smirk','',1000]};
 let chompUntil=0,exUntil=0,exEyes='',exEmo='',curEyes='',curEmo='',lastTapAt=0,streakStart=0,frenzyStart=0,word='';const bsTimes=[];
 const emoteEl=$('emote');
 function express(n){const[e,m,ms]=EXPR[n];exEyes=e;exEmo=m;exUntil=performance.now()+ms}
