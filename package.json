@@ -1,7 +1,7 @@
 {
   "name": "mochi-widget",
   "productName": "Mochi",
-  "version": "0.2.3",
+  "version": "0.2.4",
   "description": "A desktop cat that floats above your apps and types when you type.",
   "main": "main.js",
   "scripts": {

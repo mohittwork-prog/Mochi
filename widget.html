@@ -650,7 +650,7 @@ const sw=$('swatches');
 sw.innerHTML=coats.map((c,i)=>`<button class="sw" type="button" data-i="${i}" style="background:${c.c}" aria-label="${c.n}" title="${c.n}"></button>`).join('');
 function apply(){
   const c=coats[S.coat]||coats[0];
-  cat.style.setProperty('--coat',c.c);cat.style.setProperty('--belly',c.b);cat.style.setProperty('--paw',c.p?c.b:c.c);cat.style.setProperty('--nose',c.z||'#f08a99');cat.style.setProperty('--mouthc',c.w?'#efe4d0':'#4a2e26');cat.style.setProperty('--fur',c.w?'rgba(255,255,255,.22)':'rgba(0,0,0,.14)');
+  cat.style.setProperty('--coat',c.c);cat.style.setProperty('--belly',c.b);cat.style.setProperty('--paw',c.p?c.b:c.c);cat.style.setProperty('--nose',c.z||'#f08a99');cat.style.setProperty('--mouthc',c.w?'#d98794':'#4a2e26');cat.style.setProperty('--fur',c.w?'rgba(255,255,255,.22)':'rgba(0,0,0,.14)');
   cat.style.setProperty('--inkline',c.w?'rgba(255,255,255,.85)':'rgba(26,23,24,.55)');cat.style.setProperty('--hatch',c.w?'#fff':'#e46a7c');
   cat.style.setProperty('--iris',c.i||'#4a2f25');cat.style.setProperty('--whisker',c.w||'#3a2a24');
   $('coatName').textContent=c.n;
