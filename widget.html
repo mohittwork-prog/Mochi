@@ -323,9 +323,9 @@ const NS='http://www.w3.org/2000/svg';
 const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
 const coats=[
   {n:'Tuxedo',c:'#1d1c21',b:'#f3efe7',i:'#e2b23a',w:'#ddd',p:1,z:'#f08a99'},
-  {n:'Ginger',c:'#e8924a',b:'#fbe3c8',z:'#b83f52'},{n:'Cream',c:'#efd6ae',b:'#fff4e2',z:'#d0606f'},{n:'Snow',c:'#f7f3ee',b:'#ffffff',z:'#e9798a'},
-  {n:'Silver',c:'#a3a8ae',b:'#e6e8ea',z:'#c94f63'},{n:'Blue',c:'#7b8a9e',b:'#c9d2dc',z:'#f3a3b0'},{n:'Cocoa',c:'#8a5f45',b:'#d9b99f',z:'#f4a7b3'},
-  {n:'Ink',c:'#232126',b:'#3a373f',i:'#d9a83a',w:'#ddd',z:'#f08a99'},{n:'Peach',c:'#f2b48f',b:'#fde6d6',z:'#b8475a'}];
+  {n:'Ginger',c:'#e8924a',b:'#fbe3c8',z:'#1a1617'},{n:'Cream',c:'#efd6ae',b:'#fff4e2',z:'#1a1617'},{n:'Snow',c:'#f7f3ee',b:'#ffffff',z:'#1a1617'},
+  {n:'Silver',c:'#a3a8ae',b:'#e6e8ea',z:'#1a1617'},{n:'Blue',c:'#7b8a9e',b:'#c9d2dc',z:'#1a1617'},{n:'Cocoa',c:'#8a5f45',b:'#d9b99f',z:'#1a1617'},
+  {n:'Ink',c:'#232126',b:'#3a373f',i:'#d9a83a',w:'#ddd',z:'#f08a99'},{n:'Peach',c:'#f2b48f',b:'#fde6d6',z:'#1a1617'}];
 let S={name:'Mochi',coat:0,size:80,op:100,priv:false,green:false,d3:true};
 try{Object.assign(S,JSON.parse(localStorage.getItem('deskcat')||'{}'))}catch(e){}
 if(!S.look)S.look=S.d3===false?'2':'3';
