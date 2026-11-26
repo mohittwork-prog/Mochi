@@ -12,11 +12,9 @@ body{margin:0;background:#f7dc8f}
 a{color:#2b1f1a}a:hover{color:#e04e36}
 .tryinput:focus{outline:3px solid #e04e36;outline-offset:2px}
 .btn:focus-visible{outline:3px solid #2b1f1a;outline-offset:3px}
-.look{font:800 14px Nunito,system-ui,sans-serif;border:0;background:transparent;color:#2b1f1a;padding:8px 14px;border-radius:999px;min-height:40px;cursor:pointer}
-.look[aria-pressed=true]{background:#2b1f1a;color:#fff7e0}
 .coat{width:36px;height:36px;border-radius:50%;border:3px solid #fffaf0;box-shadow:0 0 0 2px #3a2420;cursor:pointer;padding:0}
 .coat[aria-pressed=true]{box-shadow:0 0 0 3px #e04e36}
-.look:focus-visible,.coat:focus-visible{outline:3px solid #e04e36;outline-offset:2px}
+.coat:focus-visible{outline:3px solid #e04e36;outline-offset:2px}
 @media (max-width:760px){.hide-sm{display:none !important}}
 </style>
 </head>
@@ -53,12 +51,6 @@ a{color:#2b1f1a}a:hover{color:#e04e36}
 
   <div style="flex: 1 1 440px; min-width: 0; display: flex; flex-direction: column; align-items: center; gap: 16px">
     <iframe id="liveCat" src="mochi.html" title="Mochi, the same cat as in the Mac app, reacting live to your typing" style="width: 100%; max-width: 440px; aspect-ratio: 280 / 308; border: 0; background: transparent; display: block" loading="eager"></iframe>
-    <div role="group" aria-label="Look" style="display: flex; flex-wrap: wrap; justify-content: center; gap: 6px; background: #fffaf0; border: 3px solid #3a2420; border-radius: 999px; padding: 4px">
-      <button type="button" class="look" data-v="ink" aria-pressed="true">Drawn</button>
-      <button type="button" class="look" data-v="2" aria-pressed="false">2D</button>
-      <button type="button" class="look" data-v="25" aria-pressed="false">2.5D</button>
-      <button type="button" class="look" data-v="3" aria-pressed="false">3D</button>
-    </div>
     <div role="group" aria-label="Coat" style="display: flex; gap: 8px; justify-content: center">
       <button type="button" class="coat" data-i="0" aria-pressed="true" aria-label="Tuxedo" style="background: #1d1c21"></button>
       <button type="button" class="coat" data-i="1" aria-pressed="false" aria-label="Ginger" style="background: #e8924a"></button>
@@ -90,7 +82,7 @@ a{color:#2b1f1a}a:hover{color:#e04e36}
       <div style="background: #f7dc8f; border: 3px solid #3a2420; border-radius: 20px; padding: 24px">
         <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="#2b1f1a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="8" height="8" rx="2"/><rect x="13" y="3" width="8" height="8" rx="4"/><rect x="3" y="13" width="8" height="8" rx="4"/><path d="M13 21l4-8 4 8z"/></svg>
         <h3 style="margin: 12px 0 6px; font-family: Fredoka, sans-serif; font-weight: 600; font-size: 22px">Four looks, nine coats</h3>
-        <p style="margin: 0">Flat 2D, soft 2.5D, real 3D or a hand-drawn style, in Tuxedo, Ginger, Cream, Snow, Silver, Blue, Cocoa, Ink or Peach.</p>
+        <p style="margin: 0">Flat 2D, soft 2.5D, real 3D or the hand-drawn style you see here, in Tuxedo, Ginger, Cream, Snow, Silver, Blue, Cocoa, Ink or Peach.</p>
       </div>
       <div style="background: #f7dc8f; border: 3px solid #3a2420; border-radius: 20px; padding: 24px">
         <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="#2b1f1a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="4" width="20" height="14" rx="2"/><rect x="13" y="10" width="7" height="6" rx="1"/><path d="M8 21h8"/></svg>
@@ -219,7 +211,7 @@ document.getElementById('try').addEventListener('input',e=>{if(performance.now()
 addEventListener('pointermove',e=>{const r=cat.getBoundingClientRect();send({t:'mouse',x:e.clientX-r.left,y:e.clientY-r.top})});
 const pick=(sel,attr,k)=>document.querySelectorAll(sel).forEach(b=>b.addEventListener('click',()=>{
   document.querySelectorAll(sel).forEach(x=>x.setAttribute('aria-pressed',x===b));send({t:'set',k,v:b.dataset[attr]})}));
-pick('.look','v','look');pick('.coat','i','coat');
+pick('.coat','i','coat');
 }
 </script>
 </body>
