@@ -6,7 +6,6 @@
   "main": "main.js",
   "scripts": {
     "start": "electron .",
-    "postinstall": "electron-builder install-app-deps",
     "dist": "electron-builder --mac dmg --arm64 --x64 --publish never"
   },
   "dependencies": {
@@ -48,6 +47,7 @@
           "path": "/Applications"
         }
       ]
-    }
+    },
+    "npmRebuild": false
   }
 }
