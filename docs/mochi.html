@@ -733,8 +733,8 @@ function reactTo(key,now){
   if(idle>5000&&count>1&&key!=='Backspace')return express('surprised');
   if(key==='Backspace'){bsTimes.push(now);while(bsTimes.length&&now-bsTimes[0]>2200)bsTimes.shift();word=word.slice(0,-1);return express(bsTimes.length>=4?'angry':'oops')}
   if(key==='?')return express('question');
-  if(key===' '){const w=word;word='';return express(/(cat|meow|love|cute|mochi|purr)$/i.test(w)?'love':'sparkle')}
-  if(key&&key.length===1)word=(word+key).slice(-12);
+  if(key===' '){const w=word;word='';return express(/(cat|meow|love|cute|mochi|purr)$/i.test(w)?'love':'surprised')}
+  if(key&&key.length===1){word=(word+key).slice(-12);return express('sparkle')}
 }
 function tap(code,key){
   wake();count++;$('count').textContent=count;
