@@ -318,10 +318,10 @@ const cat=$('cat'),stage=$('stage'),wrap=$('catwrap'),bubble=$('bubble'),dream=$
 const NS='http://www.w3.org/2000/svg';
 const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
 const coats=[
-  {n:'Tuxedo',c:'#1d1c21',b:'#f3efe7',i:'#e2b23a',w:'#ddd',p:1,z:'#f08a99'},
+  {n:'Tuxedo',c:'#1d1c21',b:'#f3efe7',i:'#e2b23a',w:'#ddd',p:1,z:'#666666'},
   {n:'Ginger',c:'#e8924a',b:'#fbe3c8',z:'#1a1617'},{n:'Cream',c:'#efd6ae',b:'#fff4e2',z:'#1a1617'},{n:'Snow',c:'#f7f3ee',b:'#ffffff',z:'#1a1617'},
   {n:'Silver',c:'#a3a8ae',b:'#e6e8ea',z:'#1a1617'},{n:'Blue',c:'#7b8a9e',b:'#c9d2dc',z:'#1a1617'},{n:'Cocoa',c:'#8a5f45',b:'#d9b99f',z:'#1a1617'},
-  {n:'Ink',c:'#232126',b:'#3a373f',i:'#d9a83a',w:'#ddd',z:'#f08a99'},{n:'Peach',c:'#f2b48f',b:'#fde6d6',z:'#1a1617'}];
+  {n:'Ink',c:'#232126',b:'#3a373f',i:'#d9a83a',w:'#ddd',z:'#666666'},{n:'Peach',c:'#f2b48f',b:'#fde6d6',z:'#1a1617'}];
 let S={name:'Mochi',coat:0,size:80,op:100,priv:false,green:false,d3:true};
 try{Object.assign(S,JSON.parse(localStorage.getItem('deskcat')||'{}'))}catch(e){}
 if(!S.look)S.look=S.d3===false?'2':'3';
@@ -650,7 +650,7 @@ const sw=$('swatches');
 sw.innerHTML=coats.map((c,i)=>`<button class="sw" type="button" data-i="${i}" style="background:${c.c}" aria-label="${c.n}" title="${c.n}"></button>`).join('');
 function apply(){
   const c=coats[S.coat]||coats[0];
-  cat.style.setProperty('--coat',c.c);cat.style.setProperty('--belly',c.b);cat.style.setProperty('--paw',c.p?c.b:c.c);cat.style.setProperty('--nose',c.z||'#f08a99');cat.style.setProperty('--mouthc',c.w?'#d98794':'#4a2e26');cat.style.setProperty('--fur',c.w?'rgba(255,255,255,.22)':'rgba(0,0,0,.14)');
+  cat.style.setProperty('--coat',c.c);cat.style.setProperty('--belly',c.b);cat.style.setProperty('--paw',c.p?c.b:c.c);cat.style.setProperty('--nose',c.z||'#f08a99');cat.style.setProperty('--mouthc',c.w?'#666666':'#4a2e26');cat.style.setProperty('--fur',c.w?'rgba(255,255,255,.22)':'rgba(0,0,0,.14)');
   cat.style.setProperty('--inkline',c.w?'rgba(255,255,255,.85)':'rgba(26,23,24,.55)');cat.style.setProperty('--hatch',c.w?'#fff':'#e46a7c');
   cat.style.setProperty('--iris',c.i||'#4a2f25');cat.style.setProperty('--whisker',c.w||'#3a2a24');
   $('coatName').textContent=c.n;
